@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from './index';
 
 export default function CrudApp() {
-    return <div><UserContext.Consumer>{value => <div>Hello, {value}</div>}</UserContext.Consumer></div>
+    const value = useContext(UserContext);
+    return <div>Hello, {value}</div>
 };
