@@ -33,15 +33,17 @@ export default function News() {
         searchInputRef.current.focus();
     }
 
-    return <>
-        <form onSubmit={handleSearch}>
+    return <div className="container max-w-md max-auto p-4 m-2 bg-red shadow-lg rounded">
+        <h2 className="text-grey-darkest font-thin">Hooks news</h2>
+        <form onSubmit={handleSearch} className="mb-2">
             <input
                 type="text"
                 onChange={event => setQuery(event.target.value)}
                 value={query}
                 ref={searchInputRef}
+                className="border p-1 rounded"
             />
-            <button type="submit">Get results</button>
+            <button type="submit" className="bg-orange rounded m-1 p-1">Get results</button>
             <button type="button" onClick={handleClearSearch}>Clear</button>
         </form>
         {loading
@@ -54,5 +56,5 @@ export default function News() {
                 ))}
             </ul>)}
         {error && <div>{error.message}</div>}
-    </>
+    </div>
 }
