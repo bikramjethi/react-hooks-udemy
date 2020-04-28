@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 class App extends Component {
   state = {
     count: 0,
-    isOn: false
+    isOn: false,
+    x: null,
+    y: null
   }
 
   incrementCount = () => {
@@ -15,15 +17,27 @@ class App extends Component {
   }
 
   componentDidMount() {
-    document.title=`You have been clicked ${this.state.count} times`;
+    document.title = `You have been clicked ${this.state.count} times`;
+    window.addEventListener('mousemove', this.handleMouseMove);
   }
 
   componentDidUpdate() {
-    document.title=`You have been clicked ${this.state.count} times`;
+    document.title = `You have been clicked ${this.state.count} times`;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('mousemove', this.handleMouseMove);
+  }
+
+  handleMouseMove = event => {
+    this.setState({
+      x: event.pageX,
+      y: event.pageY
+    })
   }
 
   render() {
-    const { isOn, count } = this.state;
+    const { isOn, count, x, y } = this.state;
     return (
       <>
         <h2>Counter</h2>
@@ -45,6 +59,9 @@ class App extends Component {
           alt="flashLight"
           onClick={this.toggleLight}
         />
+
+        <h2>Mouse position</h2>
+        <p>x position: {x} y position:{y}</p>
       </>
     );
   }

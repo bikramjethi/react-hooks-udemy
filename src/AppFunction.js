@@ -15,7 +15,6 @@ function App() {
     useEffect(() => {
         document.title = `You have clicked ${count} times`;
     })
-    
     return (
         <>
             <h2>Counter</h2>
