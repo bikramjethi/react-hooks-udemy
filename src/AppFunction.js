@@ -4,6 +4,7 @@ function App() {
     const [count, setCount] = useState(0);
     const [isOn, setIsOn] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: null, y: null });
+    const [status, setStatus] = useState(navigator.onLine);
 
     const incrementCount = () => {
         setCount(prevCount => prevCount + 1);
@@ -23,11 +24,23 @@ function App() {
     useEffect(() => {
         document.title = `You have clicked ${count} times`;
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('online', handleOnLine);
+        window.addEventListener('offline', handleOffLine);
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('online', handleOnLine);
+            window.removeEventListener('offline', handleOffLine);
         }
     }, [count]);
+
+    const handleOnLine = () => {
+        setStatus(true);
+    }
+
+    const handleOffLine = () => {
+        setStatus(false);
+    }
 
     return (
         <>
@@ -53,6 +66,9 @@ function App() {
 
             <h2>Mouse position</h2>
             <p>{JSON.stringify(mousePosition, null, 2)}</p>
+
+            <h2>Network status</h2>
+            <p>You are {status ? "online" : "offline"}</p>
         </>
     );
 }
