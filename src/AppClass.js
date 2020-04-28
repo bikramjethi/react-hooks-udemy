@@ -14,6 +14,14 @@ class App extends Component {
     this.setState(prevState => ({ isOn: !prevState.isOn }));
   }
 
+  componentDidMount() {
+    document.title=`You have been clicked ${this.state.count} times`;
+  }
+
+  componentDidUpdate() {
+    document.title=`You have been clicked ${this.state.count} times`;
+  }
+
   render() {
     const { isOn, count } = this.state;
     return (
