@@ -6,14 +6,20 @@ export default function News() {
     const [query, setQuery] = useState("react hooks");
     const searchInputRef = useRef();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     useEffect(() => {
         getResults();
     }, []);
 
     const getResults = async () => {
-        setLoading(true);
-        const response = await axios.get(`http://hn.algolia.com/api/v1/search?query=${query}`);
-        setResults(response.data.hits);
+        try {
+            setLoading(true);
+            const response = await axios.get(`http://hn.algolia.com/api/v1/search?query=${query}`);
+            setResults(response.data.hits);
+        }
+        catch (err) {
+            setError(err);
+        }
         setLoading(false);
     }
 
@@ -47,5 +53,6 @@ export default function News() {
                     </li>
                 ))}
             </ul>)}
+        {error && <div>{error.message}</div>}
     </>
 }
