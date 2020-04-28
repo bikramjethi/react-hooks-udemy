@@ -11,7 +11,7 @@ function App() {
     const [isOn, setIsOn] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: null, y: null });
     const [status, setStatus] = useState(navigator.onLine);
-    const [location, setLocation] = useState(initialLocationState);
+    const [{latitude, longitude, speed}, setLocation] = useState(initialLocationState);
     let mounted = true;
 
     const incrementCount = () => {
@@ -93,9 +93,9 @@ function App() {
             <p>You are {status ? "online" : "offline"}</p>
 
             <h2>Geolocation</h2>
-            <p>Latitude is {location.latitude}</p>
-            <p>Longitude is {location.longitude}</p>
-            <p>Your speed is {location.speed ? location.speed : "0"}</p>
+            <p>Latitude is {latitude}</p>
+            <p>Longitude is {longitude}</p>
+            <p>Your speed is {speed ? speed : "0"}</p>
         </>
     );
 }
