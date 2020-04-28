@@ -4,13 +4,17 @@ import ReactDOM from 'react-dom';
 // import App from './AppFunction';
 // import App from './Login';
 // import App from './Register';
-import App from './News';
+// import App from './News';
+import App from './CrudApp';
 import * as serviceWorker from './serviceWorker';
 
+export const UserContext = React.createContext();
+const userName = "Dave";
+
 ReactDOM.render(
-  <React.StrictMode>
+  <UserContext.Provider value={userName}>
     <App />
-  </React.StrictMode>,
+  </UserContext.Provider>,
   document.getElementById('root')
 );
 
